@@ -113,7 +113,6 @@ plt.show()
 ret3,thresh = cv.threshold(gray,0,255,cv.THRESH_BINARY+cv.THRESH_OTSU)
 # im2, contours, hierarchy = cv.findContours(threshx, cv.RETR_TREE, cv.CHAIN_APPROX_NONE)
 dxxthreshx = cv.resize(thresh,(int(imrdx.shape[1]/3),int(imrdx.shape[0]/3)))
-cv.imshow(title_window,threshx)
 '''/
 for i in range(len(contours)):
     for j in range(len(contours[i])):
@@ -131,7 +130,7 @@ edges = cv.Canny(gery, minVal, maxVal)
 cv.imshow('canny',edges)
 cv.waitKey()
 /'''
-'''/
+# '''/
 fig1 = plt.figure()
 ax1 = fig1.add_subplot(111)
 
@@ -155,10 +154,11 @@ def cannyUpdate(val):
     return edgeu
 sminVal.on_changed(cannyUpdate)
 smaxVal.on_changed(cannyUpdate)
-
+# /'''
+axcolor = 'lightgoldenrodyellow'
 fig2 = plt.figure()
 ax2 = fig2.add_subplot(111)
-
+# '''/
 sret = [[255 if x == 0 else 0 for x in w] for w in thresh]
 sret = np.array(sret)
 # sret = cv.resize(sret,(int(gery.shape[1]/3),int(gery.shape[0]/3)))
@@ -172,9 +172,9 @@ if linesP is not None:
             l = linesP[i][0]
             cv.line(sret, (l[0], l[1]), (l[2], l[3]), (0,0,255), 3, cv.LINE_AA)
 sret = cv.resize(sret,(int(gery.shape[1]/3),int(gery.shape[0]/3)))
-# houghPlot = ax2.imshow(gery)
+houghPlot = ax2.imshow(gery)
 cv.imshow("Detected Lines (in red) - Standard Hough Line Transform", gery)
-/'''
+# /'''
 threshHL = 50
 minLinLength = 50
 maxLineGap = 10
