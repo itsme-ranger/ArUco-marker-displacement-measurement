@@ -284,6 +284,7 @@ crop_margin = 50 #
 c = datetime.datetime.now()
 index = 0
 images.sort()
+
 for filename in images:
     index+=1
     stridxi = filename.index('DSC')
