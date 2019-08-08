@@ -280,7 +280,7 @@ dist0 = np.zeros([1,5])
 rvecp = np.array([[[1,1,1]]],dtype=np.float32)
 tvecp = np.array([[[0,0,0]]],dtype=np.float32)
 marker_size = 200 # mm; marker di map GO
-crop_margin = 50 #
+crop_margin = 50 # how much pixel as margin from the detected marker
 c = datetime.datetime.now()
 index = 0
 images.sort()
