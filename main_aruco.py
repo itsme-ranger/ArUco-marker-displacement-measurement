@@ -35,11 +35,19 @@ def WPofCenter(WP):
 
 def jaraknya(start,target,mat):
     # mat = np.asarray(mat)
+    sum = 0
+    for x in mat:
+        sum += x
     distnce = 0
-    for i in range(len(start)):
-        distnce += mat[i]*(target[i]-start[i])**2
-    # return math.sqrt(mat.transpose()*((target-start)**2))
-    return math.sqrt(distnce)
+    if sum != 1:
+        for i in range(len(start)):
+            distnce += mat[i]*(target[i]-start[i])**2
+        # return math.sqrt(mat.transpose()*((target-start)**2))
+        return math.sqrt(distnce)
+    else:
+        for i in range(len(start)):
+            distnce += mat[i]*(target[i]-start[i])
+        return distnce
 
 URL = '/media/ranger/01D454F10F8A7250/OneDrive - Institut Teknologi Bandung/CAMPUSS_S1/TAnjink/'
 URLsample = 'lab/try13/edgePreserving4/'
