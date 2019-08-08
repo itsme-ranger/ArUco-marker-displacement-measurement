@@ -272,7 +272,7 @@ print(datetime.datetime.now())
 /'''
 images = glob.glob(URL+URLsample+'*.JPG')
 # cor_prior = np.zeros([4,2])
-cor_prior = np.random.rand(4,2)
+cor_prior = np.random.rand(4,2) # create dummy corners for first calculation
 WP_prior = np.zeros([4,4])
 WP_center_prior = np.zeros(3)
 matr_prior = np.append(np.identity(3),[[0,0,0]],axis=0).transpose()
