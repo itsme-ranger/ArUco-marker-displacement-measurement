@@ -6,7 +6,7 @@ In layman terms, this repo is a Digital Image Correlation (DIC) of ArUco Marker.
 ## Applications:
 applicable to measure anything which the marker can be pasted there, and the local deflection across the marker is negligible.
 example:
-- Bridge deflection
+- Bridge deflection measurement
 
 ## Limitations of this version:
 - 3DOFs only: only X-Y axises (marker plane) movement and rotation on the Z axis of marker are allowed.
