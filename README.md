@@ -9,7 +9,7 @@ example:
 - Bridge deflection measurement
 
 ## Limitations of this version:
-- 3DOFs only: only X-Y axises (marker plane) movement and rotation on the Z axis of marker are allowed.
+- 3DOFs only: only X-Y axises (marker plane) translational movement and rotational movement on the Z axis of marker are allowed.
 - The marker plane should be exactly perpendicular to the camera's principle axis (or even coincide, if you're luck enough!)
 - Unoptimized corner location detection (I made some noise reduction
 
