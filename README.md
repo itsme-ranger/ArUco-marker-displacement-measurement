@@ -8,6 +8,9 @@ applicable to measure anything which the marker can be pasted there, and the loc
 example:
 - Bridge deflection measurement
 
+## Assumptions:
+- your camera is really, really static. Very slight movement will interfere the calculation (if you admitted that you can't make it really static, there is a stabilizer.py for make your image looks static for better calculation, assuming there is only slight movement)
+
 ## Limitations of this version:
 - 3DOFs only: only X-Y axises (marker plane) translational movement and rotational movement on the Z axis of marker are allowed.
 - The marker plane should be exactly perpendicular to the camera's principle axis (or even coincide, if you're luck enough!)
