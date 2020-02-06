@@ -1945,7 +1945,7 @@ Setelah dinormalisasi, Y = 0.1188385829699885; distYZ center = 0.120325668655
 
 /media/ranger/01D454F10F8A7250/OneDrive - Institut Teknologi Bandung/CAMPUSS_S1/TAnjink/lab/try13/edgePreserving4/DSC02715.JPG
 corners:
-[array([[[2956.0393, 1449.526 ],
+[array([[[.0393, 1449.526 ],
         [3285.9846, 1435.5671],
         [3301.0288, 1770.3431],
         [2969.355 , 1784.4335]]], dtype=float32)]
@@ -1967,6 +1967,7 @@ dist corner px2= 3.97587173435X = 2.3462022941930627; Z = 0.37029752391367765; Y
 dist = 2.44392608963
 distYZ = 0.68418530114
 dist corner dengan corner sebelumnya
+dist corner WP1-
 dist corner px3= 2.44419071255
 jarak corner rata2 px = 2.91037839289mm/px jangkauan = 2.53869046277px
 center

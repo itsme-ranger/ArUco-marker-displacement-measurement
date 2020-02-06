@@ -23,7 +23,6 @@ def detectMarkers(gray, filename):
         markers[_id[0]](corners[i][0],filename=filename)
     return markers
 
-
 # MEASUREMENT PROCESS
 images = load_img(folder,extension)
 markers = initMarkers(marker_size)

@@ -33,8 +33,7 @@ def WPofCenter(WP):
     WP_center[2] = (WP[2][2]-WP[0][2])/(WP[2][0]-WP[0][0])*(WP_center[0]-WP[0][0])+WP[0][2]
     return WP_center
 
-def jaraknya(start,target,mat):
-    # mat = np.asarray(mat)
+def distance(start, target, mat):
     sum = 0
     for x in mat:
         sum += x
@@ -42,7 +41,6 @@ def jaraknya(start,target,mat):
     if sum != 1:
         for i in range(len(start)):
             distnce += mat[i]*(target[i]-start[i])**2
-        # return math.sqrt(mat.transpose()*((target-start)**2))
         return math.sqrt(distnce)
     else:
         for i in range(len(start)):
@@ -50,8 +48,8 @@ def jaraknya(start,target,mat):
         return distnce
 
 URL = '/media/ranger/01D454F10F8A7250/OneDrive - Institut Teknologi Bandung/CAMPUSS_S1/TAnjink/'
-URLsample = 'lab/try13/edgePreserving4/'
-# URLsample = 'lab/try13/'
+# URLsample = 'lab/try13/edgePreserving4/'
+URLsample = 'lab/try16/'
 URLstrip = ['-' if x == '/' else x for x in URLsample]
 URLstrip = ''.join(URLstrip)
 now = datetime.datetime.now()
@@ -225,7 +223,8 @@ print (newcameramtx)
 
 # aruco_dict = aruco.Dictionary_get(aruco.DICT_6X6_250)
 # aruco_dict = aruco.Dictionary_get(aruco.DICT_5X5_250)
-aruco_dict = aruco.Dictionary_get(aruco.DICT_ARUCO_ORIGINAL)
+aruco_dict = aruco.Dictionary_get(aruco.DICT_4X4_250)
+# aruco_dict = aruco.Dictionary_get(aruco.DICT_ARUCO_ORIGINAL)
 # aruco_dict = aruco.getPredefinedDictionary(aruco.DICT_ARUCO_ORIGINAL)
 parameters = aruco.DetectorParameters_create()
 # # cornerRefinement
@@ -566,11 +565,11 @@ for filename in images:
         distX = abs(WP[i][0]-WP_prior[i][0])
         distY = abs(WP[i][1]-WP_prior[i][1])
         distZ = abs(WP[i][2]-WP_prior[i][2])
-        distance = math.sqrt(sum([(a - b) ** 2 for a, b in zip(WP[i], WP_prior[i])]))
+        jarake = math.sqrt(sum([(a - b) ** 2 for a, b in zip(WP[i], WP_prior[i])]))
         distYZ = math.sqrt(distY**2 + distZ**2)
-        f.write("X = "+str(distX)+"; Z = "+str(distZ)+"; Y = "+str(distY)+"\ndist = "+str(distance)+"\n"+"distYZ = "+str(distYZ)+"\n")
+        f.write("X = "+str(distX)+"; Z = "+str(distZ)+"; Y = "+str(distY)+"\ndist = "+str(jarake)+"\n"+"distYZ = "+str(distYZ)+"\n")
         # mengukur jarak selisih antara corner dan corner sebelumnya
-        new = jaraknya(cor[i], cor_prior[i], [1,1,0])
+        new = distance(cor[i], cor_prior[i], [1, 1, 0])
         jarak_min = min(jarak_min, new)
         jarak_max = max(jarak_max, new)
         jarak = new
@@ -587,23 +586,23 @@ for filename in images:
     jarak_max = 0
     jarak_min = 1000
     for i in range(4):
-        new = jaraknya(WP[i],WP[(i+1)%4],[1,1,1,0])
+        new = distance(WP[i], WP[(i + 1) % 4], [1, 1, 1, 0])
         jarak_min = min(jarak_min,new)
         jarak_max = max(jarak_max,new)
         jarak = new
         jarak_rata += new/4
         f.write("\ndist corner WP"+str(i)+"-"+str((i+1)%4)+"= "+str(jarak))
     jangkauan = jarak_max-jarak_min
-    jarak_total = jaraknya(WP_center_prior,WP_center,[1,1,1,0])*marker_size/jarak_rata
+    jarak_total = distance(WP_center_prior, WP_center, [1, 1, 1, 0]) * marker_size / jarak_rata
     kecermatan = marker_size/jarak_rata
-    f.write("\njarak corner rata2 WP = " + str(jarak_rata)+" kecermatan = "+str(kecermatan)+"mm/px jangkauan = "+str(jangkauan)+"px\nSetelah dinormalisasi, X= "+str(jaraknya(WP_center_prior,WP_center,[1,0,0])*marker_size/jarak_rata)+"; Y = "+str(distY*marker_size/jarak_rata)+"; distYZ center = " + str(distYZctr*marker_size/jarak_rata) + "; Z="+str(jaraknya(WP_center_prior,WP_center,[0,0,1,0])*marker_size/jarak_rata)+"jarak total= "+str(jarak_total)+"\n")
+    f.write("\njarak corner rata2 WP = " + str(jarak_rata) +" kecermatan = " + str(kecermatan) +"mm/px jangkauan = " + str(jangkauan) +"px\nSetelah dinormalisasi, X= " + str(distance(WP_center_prior, WP_center, [1, 0, 0]) * marker_size / jarak_rata) + "; Y = " + str(distY * marker_size / jarak_rata) + "; distYZ center = " + str(distYZctr * marker_size / jarak_rata) + "; Z=" + str(distance(WP_center_prior, WP_center, [0, 0, 1, 0]) * marker_size / jarak_rata) + "jarak total= " + str(jarak_total) + "\n")
     db.write(str(jarak_min) + ',' + str(jarak_max) + ',' + str(jarak_rata) + ','+str(jangkauan)+','+str(kecermatan)+','+str(jarak_total))
     # mengukur jarak antar-corner dalam unit image plane
     jarak_rata = 0
     jarak_max = 0
     jarak_min = 1000
     for i in range(4):
-        new = jaraknya(corners[0][0][i], corners[0][0][(i + 1) % 4], [1,1])
+        new = distance(corners[0][0][i], corners[0][0][(i + 1) % 4], [1, 1])
         jarak_min = min(jarak_min, new)
         jarak_max = max(jarak_max, new)
         jarak = new
