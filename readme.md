@@ -20,4 +20,4 @@ example:
 - perspective modelling: this will unlock 6DOFs movement
 
 ## About this project
-this project is intended as my senior thesis during my undergraduate study on Institut Teknologi Bandung.
+this project was intended as my undergraduate thesis at Institut Teknologi Bandung
